@@ -16,13 +16,25 @@ database.connect();
 
 server.use(express.json());
 
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://ewaste-recycle.vercel.app",
+  "https://ewaste-recycle-i5qr2suqf-somnath-dwivedis-projects.vercel.app",
+];
+
 server.use(
   cors({
-    origin: "https://ewaste-recycle.vercel.app",                  // Allow frontend requests
-    methods: "GET,POST,PUT,DELETE",                   // Allowed HTTP methods
-    credentials: true,                                // Allow cookies/session
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
   })
 );
+
 
 // Routes
 server.use("/api/v1/auth", userRoutes);
