@@ -18,7 +18,7 @@ server.use(express.json());
 
 server.use(
   cors({
-    origin: "http://localhost:3000",                  // Allow frontend requests
+    origin: "https://ewaste-recycle.vercel.app",                  // Allow frontend requests
     methods: "GET,POST,PUT,DELETE",                   // Allowed HTTP methods
     credentials: true,                                // Allow cookies/session
   })
